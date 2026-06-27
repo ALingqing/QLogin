@@ -1,0 +1,29 @@
+// 根项目 - 仅编排子项目
+// 各版本子项目的构建配置见各自 build.gradle
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+
+    group = rootProject.maven_group
+    version = rootProject.mod_version
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabricmc.net/' }
+    }
+
+    java {
+        withSourcesJar()
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = 'UTF-8'
+        it.options.release = 17
+    }
+}
+
+// 清理任务 - 删除所有子项目的构建产物
+tasks.register('cleanAll') {
+    subprojects.each { dependsOn("${it.path}:clean") }
+}
