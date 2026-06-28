@@ -4,9 +4,25 @@ pluginManagement {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
+        maven {
+            name = 'Forge'
+            url = 'https://maven.minecraftforge.net/'
+        }
+        maven {
+            name = 'Sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
+        maven {
+            name = 'GTNH Maven'
+            url = 'https://nexus.gtnewhorizons.com/repository/public/'
+        }
         mavenCentral()
         gradlePluginPortal()
     }
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
 rootProject.name = 'loginmod'
@@ -14,8 +30,9 @@ rootProject.name = 'loginmod'
 // ==================== 多版本子项目 ====================
 // 每个子项目编译为一个独立的 Mod Jar
 // 共享源码在 common/src/ 中，通过各版本模块的 sourceSets 引用
-// 构建: gradlew :v1_20_1:build  或  :v1_20_4:build  或  :v1_21:build
+// 构建: gradlew :v1_12_2:build  或  :v1_21:build  等
 
+include 'v1_12_2'
 include 'v1_21'
 include 'v1_21_1'
 include 'v1_26_2'

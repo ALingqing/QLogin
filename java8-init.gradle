@@ -1,0 +1,9 @@
+// Gradle init script to add Java 8 toolchain
+def java8Home = new File("C:\\Users\\ALingqing_\\AppData\\Roaming\\.hmcl\\java\\windows-x86_64\\mojang-jre-legacy")
+if (java8Home.exists()) {
+    println "Java 8 found at: ${java8Home}"
+    def java8Installation = org.gradle.jvm.toolchain.JavaInstallationMetadata.fromInstallationDirectory(java8Home)
+    def registry = services.get(org.gradle.jvm.toolchain.JavaToolchainRegistry)
+    registry.add(java8Installation, JavaLanguageVersion.of(8))
+    println "Java 8 added to toolchain registry"
+}
