@@ -11,6 +11,7 @@ subprojects {
     repositories {
         mavenCentral()
         maven { url 'https://maven.fabricmc.net/' }
+        maven { url 'https://maven.neoforged.net/releases/' }
     }
 
     java {
@@ -19,7 +20,13 @@ subprojects {
 
     tasks.withType(JavaCompile).configureEach {
         it.options.encoding = 'UTF-8'
-        if (!it.project.name.startsWith('v1_12')) {
+        if (it.project.name.startsWith('v1_12')) {
+            // v1_12_2-forge: Java 8 — 由子项目自行处理
+        } else if (it.project.name.startsWith('v1_26_2')) {
+            // v1_26_2-fabric: Java 25 — 由子项目自行覆盖
+        } else if (it.project.name == 'v1_21_1-neoforge' || it.project.name == 'v1_21_1-fabric') {
+            it.options.release = 21
+        } else {
             it.options.release = 17
         }
     }

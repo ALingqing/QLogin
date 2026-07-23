@@ -13,6 +13,10 @@ pluginManagement {
             url = 'https://maven.minecraftforge.net/'
         }
         maven {
+            name = 'NeoForge'
+            url = 'https://maven.neoforged.net/releases/'
+        }
+        maven {
             name = 'Sponge'
             url = 'https://repo.spongepowered.org/maven'
         }
@@ -28,17 +32,23 @@ pluginManagement {
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)' apply false
+    id 'net.neoforged.gradle.userdev' version '7.0.+' apply false
 }
 
 rootProject.name = 'loginmod'
 
 // ==================== 多版本子项目 ====================
 // 每个子项目编译为一个独立的 Mod Jar
-// 共享源码在 common/src/ 中，通过各版本模块的 sourceSets 引用
-// 构建: gradlew :v1_12_2:build  或  :v1_21:build  等
+// 目录命名规则: v{MC版本}-{加载器}
+// 构建: gradlew :v1_12_2-forge:build  或  :v1_21_1-fabric:build  等
 
-include 'v1_12_2'
-include 'v1_20_1'
-include 'v1_21'
-include 'v1_21_1'
-include 'v1_26_2'
+include 'v1_12_2-forge'
+include 'v1_19_2-forge'
+include 'v1_19_2-fabric'
+include 'v1_20_1-forge'
+include 'v1_20_1-fabric'
+include 'v1_20_1-neoforge'
+include 'v1_21-fabric'
+include 'v1_21_1-fabric'
+include 'v1_21_1-neoforge'
+include 'v1_26_2-fabric'
